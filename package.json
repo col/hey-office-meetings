@@ -1,0 +1,19 @@
+{
+  "name": "hey-office-meetings",
+  "version": "1.0.0",
+  "description": "Meeting rooms",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-sg-maker-night/hey-office-meetings.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tw-sg-maker-night/hey-office-meetings/issues"
+  },
+  "homepage": "https://github.com/tw-sg-maker-night/hey-office-meetings#readme"
+}
