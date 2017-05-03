@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/tw-sg-maker-night/hey-office-meetings/issues"
   },
-  "homepage": "https://github.com/tw-sg-maker-night/hey-office-meetings#readme"
+  "homepage": "https://github.com/tw-sg-maker-night/hey-office-meetings#readme",
+  "dependencies": {
+    "google-auth-library": "^0.10.0",
+    "googleapis": "^19.0.0"
+  }
 }

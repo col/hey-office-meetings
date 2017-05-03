@@ -4,3 +4,6 @@ jspm_packages
 
 # Serverless directories
 .serverless
+
+# Google calendar client secret
+client_secret.json
