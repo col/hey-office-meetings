@@ -1,16 +1,24 @@
-'use strict';
+'use strict'
 
-module.exports.hello = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
+var Utils = require('./lib/utils')
+var Lex = require('lex-sdk')
 
-  callback(null, response);
+var handlers = {
+  'BookMeetingRoom.Dialog': function() {
+    this.emit(':tell', "Ok, I've booked Amoy from 8pm today for an hour");
+  },
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
-};
+  'BookMeetingRoom.Fulfillment': function() {    
+    this.emit(':tell', 'Not yet implemented');    
+  }
+
+}
+
+module.exports = {
+  bookMeetingRoom: (event, context, callback) => {
+    console.log("Event = " + Utils.inspect(event))
+    var lex = Lex.handler(event, context)
+    lex.registerHandlers(handlers)
+    lex.execute()
+  }
+}

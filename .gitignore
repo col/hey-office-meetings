@@ -7,3 +7,5 @@ jspm_packages
 
 # Google calendar client secret
 client_secret.json
+
+.env
