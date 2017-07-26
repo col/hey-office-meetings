@@ -19,7 +19,9 @@
   "dependencies": {
     "google-auth-library": "^0.10.0",
     "googleapis": "^19.0.0",
-    "lex-sdk": "col/lex-sdk"
+    "lex-sdk": "col/lex-sdk",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",

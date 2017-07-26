@@ -33,4 +33,19 @@ describe('BookMeetingRoom Handler', () => {
 
   })
 
+  describe('fulfill a request for room by name and start time', () => {
+
+    it('should book the meeting room', (done) => {
+      var event = testEvent('BookMeetingRoom', 'FulfillmentCodeHook', {}, {StartTime: "20:00", MeetingRoom: "Amoy"})
+      handler.bookMeetingRoom(event, {
+        succeed: function(response) {
+          console.log("Response = ", response)
+          expect(response.dialogAction.message.content).toEqual("Ok, I've booked Amoy from 8pm today for an hour")
+          done()
+        }
+      })
+    })
+
+  })
+
 })
