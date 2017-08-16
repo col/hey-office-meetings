@@ -31,11 +31,25 @@ describe('BookMeetingRoom Handler', () => {
 
   describe('ask to book a meeting room with no details', () => {
     it('should prompt for a start time', (done) => {
-        var event = testEvent('BookMeetingRoom', 'DialogCodeHook', {}, {})
+        var event = testEvent('BookMeetingRoom', 'DialogCodeHook', {}, {StartTime: null, MeetingRoom: null})
 
         handler.bookMeetingRoom(event, {
           succeed: function(response) {
             console.log("Response = ", response)
+            var expectedResponse = {
+              sessionAttributes: {},
+              dialogAction: {
+                type: "ElicitSlot",
+                slotToElicit: "StartTime",
+                intentName: "BookMeetingRoom",
+                slots: {
+                  StartTime: null,
+                  MeetingRoom: null
+                },
+                message: {}
+              }
+            }
+            expect(response).toEqual(expectedResponse)
             expect(response.dialogAction.type).toEqual("ElicitSlot")
             expect(response.dialogAction.slotToElicit).toEqual("StartTime")
             sinon.assert.notCalled(CalendarUtils.createEvent)

@@ -10,10 +10,10 @@ var handlers = {
   'BookMeetingRoom.Dialog': function() {
 
     if (!this.slots.StartTime) {
-      this.emit(':elicit', 'StartTime', {})
+      this.emit(':elicit', 'StartTime')
     }
     else if (!this.slots.MeetingRoom) {
-      this.emit(':elicit', 'MeetingRoom', {})
+      this.emit(':elicit', 'MeetingRoom')
     }
     else {
       this.emit('BookMeetingRoom.Fulfillment')
