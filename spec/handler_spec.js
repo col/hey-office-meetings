@@ -45,8 +45,7 @@ describe('BookMeetingRoom Handler', () => {
                 slots: {
                   StartTime: null,
                   MeetingRoom: null
-                },
-                message: {}
+                }
               }
             }
             expect(response).toEqual(expectedResponse)
