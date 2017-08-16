@@ -8,7 +8,7 @@ var moment = require('moment')
 var handlers = {
   'BookMeetingRoom.Dialog': function() {
     // TODO: ... well everything
-    this.emit(':tell', "Ok, I've booked Amoy from 8pm today for an hour");
+    this.emit(':tell', "I have no idea what's going on.")
   },
 
   'BookMeetingRoom.Fulfillment': function() {
@@ -16,7 +16,7 @@ var handlers = {
     var startTime = moment().hours(startHourMin[0]).minutes(startHourMin[1]).seconds(0).milliseconds(0)
     var endTime = moment(startTime).add(1, 'hours')
     CalendarUtils.createEvent('Booked by HeyOffice', startTime, endTime, 'charris@thoughtworks.com', (event) => {
-      this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`);
+      this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
     })
   }
 

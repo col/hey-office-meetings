@@ -24,3 +24,10 @@ or
 ```
 npm features features/book_meeting_room.feature:3
 ```
+
+
+## Deploy
+
+```
+serverless deploy
+```
