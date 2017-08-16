@@ -26,9 +26,13 @@ var handlers = {
     var endTime = moment(startTime).add(1, 'hours')
     console.log(`Creating event with: title: 'Booked by HeyOffice', startTime: ${startTime.format()}, endTime: ${endTime.format()}, roomEmail: 'charris@thoughtworks.com'`)
     CalendarUtils.createEvent('Booked by HeyOffice', startTime, endTime, 'charris@thoughtworks.com', (event) => {
-      console.log(`Created an event!`)
-      console.log("Event:", Utils.inspect(event))
-      this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
+      if (event) {
+        console.log(`Created an event!`)
+        console.log("Event:", Utils.inspect(event))
+        this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
+      } else {
+        this.emit(':tell', `Sorry, there was an issue with the booking. Please try again later.`)
+      }
     })
   }
 
