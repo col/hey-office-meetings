@@ -1,5 +1,9 @@
 Feature: Book meeting room at a set time today
 
+  Scenario: Don't specify any details
+    When I say "Book me a meeting room"
+    Then I receive "What time do you need the room?"
+
   Scenario: Specify room and start time
     When I say "Book me the Amoy meeting room for 8pm"
     Then I receive "Ok, I've booked Amoy from 8pm today for an hour"

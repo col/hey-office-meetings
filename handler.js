@@ -6,9 +6,14 @@ var CalendarUtils = require('./lib/calendar_utils')
 var moment = require('moment')
 
 var handlers = {
+
   'BookMeetingRoom.Dialog': function() {
-    // TODO: ... well everything
-    this.emit(':tell', "I have no idea what's going on.")
+
+    if (!this.slots.StartTime) {
+      this.emit(':elicit', 'StartTime', {})
+    } else {
+      this.emit(':tell', "I have no idea what's going on.")
+    }
   },
 
   'BookMeetingRoom.Fulfillment': function() {
