@@ -24,7 +24,10 @@ var handlers = {
     var startHourMin = this.slots.StartTime.split(":")
     var startTime = moment().hours(startHourMin[0]).minutes(startHourMin[1]).seconds(0).milliseconds(0)
     var endTime = moment(startTime).add(1, 'hours')
+    console.log(`Creating event with: title: 'Booked by HeyOffice', startTime: ${startTime.format()}, endTime: ${endTime.format()}, roomEmail: 'charris@thoughtworks.com'`)
     CalendarUtils.createEvent('Booked by HeyOffice', startTime, endTime, 'charris@thoughtworks.com', (event) => {
+      console.log(`Created an event!`)
+      console.log("Event:", Utils.inspect(event))      
       this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
     })
   }

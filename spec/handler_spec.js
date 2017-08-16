@@ -68,7 +68,12 @@ describe('BookMeetingRoom Handler', () => {
 
     it('should book the meeting room', (done) => {
       var event = testEvent('BookMeetingRoom', 'FulfillmentCodeHook', {}, {StartTime: "20:00", MeetingRoom: "Amoy"})
-      var expectedEvent = {}
+      var expectedEvent = {
+        summary: 'Booked by HeyOffice',
+        start: { dateTime: 'blah' },
+        end: { dateTime: 'blah' },
+        attendees: [ { email: 'charris@thoughtworks.com' } ]
+      }
       CalendarUtils.createEvent.callsArgWith(4, expectedEvent)
 
       handler.bookMeetingRoom(event, {
