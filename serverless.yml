@@ -9,3 +9,11 @@ provider:
 functions:
   bookMeetingRoom:
     handler: handler.bookMeetingRoom
+    environment:
+      GOOGLE_CLIENT_ID: ${env:GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${env:GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URL: ${env:GOOGLE_REDIRECT_URL}
+      GOOGLE_ACCESS_TOKEN: ${env:GOOGLE_ACCESS_TOKEN}
+      GOOGLE_REFRESH_TOKEN: ${env:GOOGLE_REFRESH_TOKEN}
+      GOOGLE_TOKEN_TYPE: ${env:GOOGLE_TOKEN_TYPE}
+      GOOGLE_EXPIRY_DATE: ${env:GOOGLE_EXPIRY_DATE}
