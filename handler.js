@@ -11,8 +11,12 @@ var handlers = {
 
     if (!this.slots.StartTime) {
       this.emit(':elicit', 'StartTime', {})
-    } else {
-      this.emit(':tell', "I have no idea what's going on.")
+    }
+    else if (!this.slots.MeetingRoom) {
+      this.emit(':elicit', 'MeetingRoom', {})
+    }
+    else {
+      this.emit('BookMeetingRoom.Fulfillment')
     }
   },
 
