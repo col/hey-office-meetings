@@ -2,7 +2,7 @@ const nock = require('nock')
 const sinon = require('sinon')
 const handler = require('../handler')
 const CalendarUtils = require('../lib/calendar_utils')
-var moment = require('moment')
+var moment = require('moment-timezone')
 
 function testEvent(intentName, invocationSource, sessionAttributes, slots) {
   intentName = intentName || 'TestIntent'
@@ -55,8 +55,8 @@ describe('BookMeetingRoom Handler', () => {
         succeed: function(response) {
           console.log("Response = ", response)
           expect(response.dialogAction.message.content).toEqual("Ok, I've booked Amoy from 8pm today for an hour")
-          var expectedStartTime = moment().hours(20).minutes(0).seconds(0).milliseconds(0)
-          var expectedEndTime = moment().hours(21).minutes(0).seconds(0).milliseconds(0)
+          var expectedStartTime = moment().tz('Asia/Singapore').hours(20).minutes(0).seconds(0).milliseconds(0)
+          var expectedEndTime = moment().tz('Asia/Singapore').hours(21).minutes(0).seconds(0).milliseconds(0)
           sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'charris@thoughtworks.com')
           done()
         }
@@ -80,8 +80,8 @@ describe('BookMeetingRoom Handler', () => {
         succeed: function(response) {
           console.log("Response = ", response)
           expect(response.dialogAction.message.content).toEqual("Ok, I've booked Amoy from 8pm today for an hour")
-          var expectedStartTime = moment().hours(20).minutes(0).seconds(0).milliseconds(0)
-          var expectedEndTime = moment().hours(21).minutes(0).seconds(0).milliseconds(0)
+          var expectedStartTime = moment().tz('Asia/Singapore').hours(20).minutes(0).seconds(0).milliseconds(0)
+          var expectedEndTime = moment().tz('Asia/Singapore').hours(21).minutes(0).seconds(0).milliseconds(0)
           sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'charris@thoughtworks.com')
           done()
         }
