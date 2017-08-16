@@ -15,6 +15,31 @@ CalendarUtils.createEvent(title, startTime, endTime, room, (event) => {
     console.log("Attendees:", event.attendees.map((attendee) => {
       return attendee.email
     }))
+
+    CalendarUtils.findEvent(title, startTime, endTime, room, (event) => {
+      if (event) {
+        console.log(`Found a matching event!`)
+        console.log("Title:", event.summary)
+        console.log("Starting at:", event.start.dateTime)
+        console.log("Ending at:", event.end.dateTime)
+        console.log("Attendees:", event.attendees.map((attendee) => {
+          return attendee.email
+        }))
+
+
+        CalendarUtils.deleteEvent(event.id, (success) => {
+          if (success) {
+            console.log(`Deleted event.`)
+          } else {
+            console.log(`Epic FAIL!`)
+          }
+        })
+
+      } else {
+        console.log(`Epic FAIL!`)
+      }
+    })
+    
   } else {
     console.log(`Epic FAIL!`)
   }
