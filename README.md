@@ -16,13 +16,13 @@ npm test
 ## Run Feature Tests
 
 ```
-npm features
+npm run features
 ```
 
 or
 
 ```
-npm features features/book_meeting_room.feature:3
+npm run features features/book_meeting_room.feature:3
 ```
 
 

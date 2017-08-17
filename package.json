@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "test": "jasmine-node spec",
-    "features": "cucumber.js"
+    "features": "cucumber.js --tags 'not @wip'"
   },
   "repository": {
     "type": "git",
