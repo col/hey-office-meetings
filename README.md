@@ -9,11 +9,15 @@ Notes:
 
 ## Run Tests
 
+Be sure to pull in latest version of col/lex-sdk package by running `npm update`
+
 ```
 npm test
 ```
 
 ## Run Feature Tests
+
+Be sure to source Google Calendar credentials as environment variables (can be found in LastPass Note) before running feature tests
 
 ```
 npm run features
