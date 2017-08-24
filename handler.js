@@ -3,6 +3,7 @@
 var Utils = require('./lib/utils')
 var Lex = require('lex-sdk')
 var CalendarUtils = require('./lib/calendar_utils')
+var Rooms = require('./lib/rooms')
 var moment = require('moment-timezone')
 
 var handlers = {
@@ -24,12 +25,13 @@ var handlers = {
     var startHourMin = this.slots.StartTime.split(":")
     var startTime = moment().tz('Asia/Singapore').hours(startHourMin[0]).minutes(startHourMin[1]).seconds(0).milliseconds(0)
     var endTime = moment(startTime).add(1, 'hours')
-    console.log(`Creating event with: title: 'Booked by HeyOffice', startTime: ${startTime.format()}, endTime: ${endTime.format()}, roomEmail: 'charris@thoughtworks.com'`)
-    CalendarUtils.createEvent('Booked by HeyOffice', startTime, endTime, 'charris@thoughtworks.com', (event) => {
+    var room = Rooms.findByName(this.slots.MeetingRoom)
+    debug(`Creating event with: title: 'Booked by HeyOffice', startTime: ${startTime.format()}, endTime: ${endTime.format()}, roomEmail: '${room.email}'`)
+    CalendarUtils.createEvent('Booked by HeyOffice', startTime, endTime, room.email, (event) => {
       if (event) {
-        console.log(`Created an event!`)
-        console.log("Event:", Utils.inspect(event))
-        this.emit(':tell', `Ok, I've booked Amoy from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
+        debug(`Created an event!`)
+        debug("Event:", Utils.inspect(event))
+        this.emit(':tell', `Ok, I've booked ${room.name} from ${startTime.format("ha")} today for ${endTime.from(startTime, true)}`)
       } else {
         this.emit(':tell', `Sorry, there was an issue with the booking. Please try again later.`)
       }
@@ -38,10 +40,19 @@ var handlers = {
 
 }
 
+function debug(message, arg) {
+  if (process.env.NODE_ENV != "test") {
+    console.log(message, arg)
+  }
+}
+
 module.exports = {
   bookMeetingRoom: (event, context, callback) => {
-    console.log("Event = " + Utils.inspect(event))
-    var lex = Lex.handler(event, context)
+    debug("Event = ", Utils.inspect(event))
+    var lex = Lex.handler(event, { succeed: (response) => {
+      debug("Response = ", Utils.inspect(response))
+      context.succeed(response)
+    }})
     lex.registerHandlers(handlers)
     lex.execute()
   }

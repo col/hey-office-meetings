@@ -35,7 +35,6 @@ describe('BookMeetingRoom Handler', () => {
 
         handler.bookMeetingRoom(event, {
           succeed: function(response) {
-            console.log("Response = ", response)
             var expectedResponse = {
               sessionAttributes: {},
               dialogAction: {
@@ -66,11 +65,10 @@ describe('BookMeetingRoom Handler', () => {
 
       handler.bookMeetingRoom(event, {
         succeed: function(response) {
-          console.log("Response = ", response)
           expect(response.dialogAction.message.content).toEqual("Ok, I've booked Amoy from 8pm today for an hour")
           var expectedStartTime = moment().tz('Asia/Singapore').hours(20).minutes(0).seconds(0).milliseconds(0)
           var expectedEndTime = moment().tz('Asia/Singapore').hours(21).minutes(0).seconds(0).milliseconds(0)
-          sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'charris@thoughtworks.com')
+          sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'thoughtworks.singapore+amoy@gmail.com')
           done()
         }
       })
@@ -85,17 +83,16 @@ describe('BookMeetingRoom Handler', () => {
         summary: 'Booked by HeyOffice',
         start: { dateTime: 'blah' },
         end: { dateTime: 'blah' },
-        attendees: [ { email: 'charris@thoughtworks.com' } ]
+        attendees: [ { email: 'thoughtworks.singapore+amoy@gmail.com' } ]
       }
       CalendarUtils.createEvent.callsArgWith(4, expectedEvent)
 
       handler.bookMeetingRoom(event, {
         succeed: function(response) {
-          console.log("Response = ", response)
           expect(response.dialogAction.message.content).toEqual("Ok, I've booked Amoy from 8pm today for an hour")
           var expectedStartTime = moment().tz('Asia/Singapore').hours(20).minutes(0).seconds(0).milliseconds(0)
           var expectedEndTime = moment().tz('Asia/Singapore').hours(21).minutes(0).seconds(0).milliseconds(0)
-          sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'charris@thoughtworks.com')
+          sinon.assert.calledWith(CalendarUtils.createEvent, 'Booked by HeyOffice', expectedStartTime, expectedEndTime, 'thoughtworks.singapore+amoy@gmail.com')
           done()
         }
       })

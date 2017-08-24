@@ -6,6 +6,7 @@ var google = require('googleapis')
 var googleAuth = require('google-auth-library')
 
 var CalendarUtils = require('../../lib/calendar_utils')
+var Rooms = require('../../lib/rooms')
 var moment = require('moment')
 
 const Lex = new AWS.LexRuntime({
@@ -35,6 +36,9 @@ defineSupportCode(function({Then, When}) {
     When(/^I say "([^"]*)"$/, function(input, callback) {
         var params = buildLexRequestParams(input)
         Lex.postText(params, function(err, data) {
+          if (err) {
+            console.log("Lex Error: ", err)
+          }
           response = data.message
           callback()
         })
@@ -54,7 +58,10 @@ defineSupportCode(function({Then, When}) {
       var endHourMin = data.End.split(":")
       var endTime = moment().hours(endHourMin[0]).minutes(endHourMin[1]).seconds(0).milliseconds(0)
 
-      CalendarUtils.findEvent(data.Title, startTime, endTime, null, (event) => {
+      var room = Rooms.findByName(data.Room.trim())
+      expect(room).to.not.be.null
+
+      CalendarUtils.findEvent(data.Title, startTime, endTime, room.email, (event) => {
         expect(event).to.not.be.null
         callback()
       })

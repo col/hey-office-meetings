@@ -4,7 +4,7 @@
   "description": "Meeting rooms",
   "main": "handler.js",
   "scripts": {
-    "test": "jasmine-node spec",
+    "test": "export NODE_ENV=test && jasmine-node spec",
     "features": "cucumber.js --tags 'not @wip'"
   },
   "repository": {
